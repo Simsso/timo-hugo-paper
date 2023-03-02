@@ -1,1 +1,9 @@
 /* Place custom css here. */
+
+img.featured-image {
+    max-width: 100%;
+}
+
+img.size-large {
+    max-width: 100%;
+}
