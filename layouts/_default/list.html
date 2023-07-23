@@ -6,10 +6,7 @@
 {{ end }}
 
 <!-- $pages -->
-{{ $pages := union .RegularPages .Sections }}<!---->
-{{ if .IsHome }}<!---->
-{{ $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}<!---->
-{{ end }}
+{{ $pages := .Site.RegularPages }}
 
 <!-- Articles -->
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages
