@@ -1442,6 +1442,10 @@ body {
   padding-right: 0.75rem;
 }
 
+.pt-8 {
+  padding-top: 2rem;
+}
+
 .pt-16 {
   padding-top: 4rem;
 }
@@ -1576,8 +1580,7 @@ body {
 
 article {
   font-size: 1.125rem;
-  line-height: 1.75rem;
-  line-height: 1.9;
+  line-height: 1.6;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
