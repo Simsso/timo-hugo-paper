@@ -69,3 +69,15 @@ table.voting-matching-table td.bg-vote-no {
     background-color: rgb(225, 59, 59);
     color: white
 }
+
+.archive-wrapper li {
+    clear: both;
+    margin-bottom: 5px;
+}
+
+.archive-wrapper li span {
+    font-style: italic;
+    float: right;
+    color: #999;
+    font-size: 85%;
+}

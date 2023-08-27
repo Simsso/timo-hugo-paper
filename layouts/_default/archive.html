@@ -1,0 +1,22 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<p>This is a full list of all posts on this blog:</p>
+
+<!-- $pages -->
+{{ $pages := .Site.RegularPages | default (slice "post") }}
+
+<!-- Articles -->
+<section class="archive-wrapper">
+    <ul>
+        {{ range $index, $page := $pages }}
+        <li>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <span>{{ .Date | time.Format ":date_medium" }}</span>
+        </li>
+        {{ end }}
+    </ul>
+</section>
+
+{{ end }}
