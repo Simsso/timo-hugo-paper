@@ -12,11 +12,19 @@
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages
 }}<!---->
 
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
-  <h2 class="!my-0 pb-1 !leading-none">{{ .Title }}</h2>
-  <time class="text-sm opacity-50">{{ .Date | time.Format ":date_medium" }}</time>
-  <a class="absolute inset-0 text-[0]" href="{{ .Permalink }}">{{ .Title }}</a>
-</section>
+<a class="post-box" href="{{ .Permalink }}">
+  <div>
+    {{ if .Params.featured_image }}
+    <div style="background-image: url({{ .Params.featured_image }})" class="featured" alt="Blog featured image"></div>
+    {{ else }}
+    <div style="background: #aaa" class="featured" alt="Blog featured image"></div>
+    {{ end }}
+    <h2 class="!my-0 !leading-none">{{ .Title }}</h2>
+    <p class="date text-sm">Published: <time>{{ .Date | time.Format ":date_medium"
+        }}</time></p>
+  </div>
+</a>
+
 {{ end }}
 
 <!-- Main Nav -->

@@ -1,5 +1,10 @@
 /* Place custom css here. */
 
+img {
+    /** For transparent images to have a white bg in dark and light mode. **/
+    background: white;
+}
+
 img.featured-image {
     max-width: 100%;
     margin-top: 0;
@@ -81,4 +86,92 @@ table.voting-matching-table td.bg-vote-no {
     float: right;
     color: #999;
     font-size: 85%;
+}
+
+.post-box {
+    display: flex;
+    text-decoration: none;
+    min-height: 142px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    background: #F7F9FA;
+    color: #333333;
+    padding: 25px;
+    position: relative;
+}
+
+.dark .post-box {
+    background: #21282c;
+    color: #ddd;
+}
+
+.post-box:last-of-type {
+    margin-bottom: 0;
+}
+
+.post-box>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 280px;
+    flex-grow: 1;
+}
+
+.post-box .featured {
+    position: absolute;
+    width: 280px;
+    background-size: cover;
+    top: 0;
+    background-position: center center;
+    left: 0;
+    bottom: 0;
+    filter: brightness(90%);
+}
+
+.post-box h2 {
+    padding-bottom: 10pt;
+    flex-grow: 1;
+}
+
+.post-box h2,
+.post-box p,
+.post-box span {
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.post-box p.date {
+    font-size: 90%;
+    margin-top: auto;
+    /* Pushes the element to the bottom */
+    opacity: 65%;
+}
+
+.post-box:hover {
+    box-shadow: 1px 1px 5px #ddd;
+}
+
+.dark .post-box:hover {
+    box-shadow: 1px 1px 5px #111;
+}
+
+@media screen and (max-width: 750px) {
+    .post-box {
+        min-height: 106px;
+    }
+
+    .post-box .featured {
+        right: 0;
+        width: auto;
+        opacity: .4;
+        filter: brightness(100%);
+    }
+
+    .post-box>div {
+        padding-left: 0;
+    }
+
+    .post-box p.date {
+        opacity: 90%;
+    }
 }
