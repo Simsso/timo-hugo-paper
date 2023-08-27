@@ -6,7 +6,7 @@
 {{ end }}
 
 <!-- $pages -->
-{{ $pages := .Site.RegularPages | default (slice "post") }}
+{{ $pages := where .Site.RegularPages "Type" "post" }}
 
 <!-- Articles -->
 {{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages

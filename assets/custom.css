@@ -72,6 +72,7 @@ table.voting-matching-table td.bg-vote-no {
 
 .archive-wrapper li {
     clear: both;
+    margin-top: 0;
     margin-bottom: 5px;
 }
 

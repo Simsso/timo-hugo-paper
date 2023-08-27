@@ -1,11 +1,11 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
+<!-- $pages -->
+{{ $pages := where .Site.RegularPages "Type" "post" }}
+
+<h1>{{ .Title }} (#{{ len $pages }} Posts)</h1>
 
 <p>This is a full list of all posts on this blog:</p>
-
-<!-- $pages -->
-{{ $pages := .Site.RegularPages | default (slice "post") }}
 
 <!-- Articles -->
 <section class="archive-wrapper">
