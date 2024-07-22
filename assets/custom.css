@@ -100,9 +100,9 @@ table.voting-matching-table td.bg-vote-no {
     position: relative;
 }
 
-.dark .post-box {
-    background: #21282c;
-    color: #ddd;
+.post-box:hover {
+    box-shadow: 1px 1px 5px #ddd;
+    background: #FCFCFE;
 }
 
 .post-box:last-of-type {
@@ -147,12 +147,22 @@ table.voting-matching-table td.bg-vote-no {
     opacity: 65%;
 }
 
-.post-box:hover {
-    box-shadow: 1px 1px 5px #ddd;
+.post-box:hover .featured {
+    filter: brightness(100%);
+}
+
+.dark .post-box {
+    background: #21282c;
+    color: #ddd;
 }
 
 .dark .post-box:hover {
     box-shadow: 1px 1px 5px #111;
+    background: #31383c;
+}
+
+.dark .post-box:hover .featured {
+    filter: brightness(100%);
 }
 
 @media screen and (max-width: 750px) {
