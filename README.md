@@ -47,8 +47,6 @@ For more information, please read the [official guide](https://gohugo.io/getting
 Available options to `config.toml`:
 
 ```toml
-disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
-
 [params]
   # color style
   color = 'linen'                           # linen, wheat, gray, light
@@ -70,7 +68,6 @@ disqusShortname = 'YOUR_DISQUS_SHORTNAME'   # use disqus comments
   disableHLJS = true                        # disable highlight.js
   monoDarkIcon = true                       # show monochrome dark mode icon
   gravatarCdn = 'GRAVATAR_CDN_LINK'         # e.g. 'https://cdn.v2ex.com/gravatar/'
-  graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
 ```
 
 Available options to front matter:
