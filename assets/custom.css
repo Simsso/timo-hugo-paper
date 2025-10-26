@@ -1,7 +1,7 @@
 /* Place custom css here. */
 
-img {
-    /** For transparent images to have a white bg in dark and light mode. **/
+img.bg-white {
+    /** For transparent images to have a white bg in light and dark mode. **/
     background: white;
 }
 
