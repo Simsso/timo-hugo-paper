@@ -43,6 +43,11 @@
     {{ block "main" . }}{{ end }}
   </main>
 
+  {{ if .Store.Get "hasCarousel" }}
+  {{ $carousel_js := resources.Get "carousel.js" | minify | fingerprint }}
+  <script defer src="{{ $carousel_js.RelPermalink }}" integrity="{{ $carousel_js.Data.Integrity }}"></script>
+  {{ end }}
+
   {{ partial "footer.html" . }}
 </body>
 

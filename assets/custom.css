@@ -47,6 +47,150 @@ main img {
     margin-right: auto;
 }
 
+/** Image carousel **/
+
+.image-carousel {
+    margin: 2rem 0;
+}
+
+.image-carousel__viewport {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.image-carousel--enhanced .image-carousel__viewport {
+    scrollbar-width: none;
+}
+
+.image-carousel--enhanced .image-carousel__viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.image-carousel__slide {
+    flex: 0 0 100%;
+    margin: 0;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.image-carousel__media {
+    align-items: center;
+    aspect-ratio: var(--carousel-aspect, 4 / 3);
+    background: rgb(0 0 0 / 4%);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.dark .image-carousel__media {
+    background: rgb(255 255 255 / 8%);
+}
+
+.image-carousel__media picture {
+    display: contents;
+}
+
+.image-carousel__media img {
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+    width: 100%;
+}
+
+.image-carousel__slide figcaption {
+    color: rgb(0 0 0 / 60%);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-top: 0.625rem;
+    text-align: center;
+}
+
+.dark .image-carousel__slide figcaption {
+    color: rgb(255 255 255 / 60%);
+}
+
+.image-carousel__controls {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.image-carousel__controls[hidden] {
+    display: none;
+}
+
+.image-carousel__button,
+.image-carousel__dot {
+    border: 0;
+    cursor: pointer;
+}
+
+.image-carousel__button {
+    align-items: center;
+    background: rgb(0 0 0 / 7%);
+    border-radius: 9999px;
+    display: inline-flex;
+    height: 2rem;
+    justify-content: center;
+    width: 2rem;
+}
+
+.dark .image-carousel__button {
+    background: rgb(255 255 255 / 12%);
+}
+
+.image-carousel__button:disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.image-carousel__dots {
+    display: flex;
+    gap: 0.375rem;
+}
+
+.image-carousel__dot {
+    background: rgb(0 0 0 / 20%);
+    border-radius: 9999px;
+    height: 0.5rem;
+    padding: 0;
+    width: 0.5rem;
+}
+
+.dark .image-carousel__dot {
+    background: rgb(255 255 255 / 30%);
+}
+
+.image-carousel__dot[aria-current="true"] {
+    background: #0b24fb;
+}
+
+.image-carousel__counter {
+    font-size: 0.75rem;
+    min-width: 2.5rem;
+    text-align: center;
+}
+
+.image-carousel__viewport:focus-visible,
+.image-carousel__button:focus-visible,
+.image-carousel__dot:focus-visible {
+    outline: 2px solid #0b24fb;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .image-carousel__viewport {
+        scroll-behavior: auto;
+    }
+}
+
 /** Page specific CSS **/
 
 /** Miniature Grand Piano **/

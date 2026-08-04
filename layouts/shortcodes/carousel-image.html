@@ -1,0 +1,39 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $caption := .Get "caption" -}}
+{{- if not $src -}}
+  {{- errorf "carousel-image shortcode requires a src parameter: %s" .Position -}}
+{{- end -}}
+{{- if not $alt -}}
+  {{- errorf "carousel-image shortcode requires an alt parameter: %s" .Position -}}
+{{- end -}}
+{{- $image := .Page.Resources.GetMatch $src -}}
+{{- if not $image -}}
+  {{- errorf "carousel image %q was not found in the page bundle: %s" $src .Position -}}
+{{- end -}}
+{{- if ne $image.ResourceType "image" -}}
+  {{- errorf "carousel resource %q is not an image: %s" $src .Position -}}
+{{- end -}}
+{{- $smallWidth := int (math.Min 768 $image.Width) -}}
+{{- $largeWidth := int (math.Min 1536 $image.Width) -}}
+{{- $small := $image.Resize (printf "%dx q82" $smallWidth) -}}
+{{- $large := $image.Resize (printf "%dx q82" $largeWidth) -}}
+{{- $smallAVIF := $image.Resize (printf "%dx avif q60" $smallWidth) -}}
+{{- $largeAVIF := $image.Resize (printf "%dx avif q60" $largeWidth) -}}
+
+<figure class="image-carousel__slide" data-carousel-slide>
+  <a class="image-carousel__media" href="{{ $image.RelPermalink }}">
+    <picture>
+      <source type="image/avif"
+        srcset="{{ $smallAVIF.RelPermalink }} {{ $smallAVIF.Width }}w, {{ $largeAVIF.RelPermalink }} {{ $largeAVIF.Width }}w"
+        sizes="(max-width: 768px) calc(100vw - 4rem), 704px">
+      <img src="{{ $small.RelPermalink }}"
+        srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+        sizes="(max-width: 768px) calc(100vw - 4rem), 704px" width="{{ $large.Width }}" height="{{ $large.Height }}"
+        loading="lazy" decoding="async" alt="{{ $alt }}">
+    </picture>
+  </a>
+  {{- with $caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>

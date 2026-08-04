@@ -1,0 +1,20 @@
+{{- $label := .Get "label" | default "Image carousel" -}}
+{{- $aspect := .Get "aspect" | default "4 / 3" -}}
+{{- .Page.Store.Set "hasCarousel" true -}}
+
+<section class="image-carousel not-prose" data-carousel aria-label="{{ $label }}"
+  aria-roledescription="carousel" style="--carousel-aspect: {{ $aspect }};">
+  <div class="image-carousel__viewport" data-carousel-viewport tabindex="0">
+    {{- .Inner -}}
+  </div>
+  <div class="image-carousel__controls" data-carousel-controls hidden>
+    <button class="image-carousel__button" data-carousel-previous type="button" aria-label="Previous image">
+      <span aria-hidden="true">&larr;</span>
+    </button>
+    <div class="image-carousel__dots" data-carousel-dots aria-label="Choose image"></div>
+    <span class="image-carousel__counter" data-carousel-counter aria-live="polite"></span>
+    <button class="image-carousel__button" data-carousel-next type="button" aria-label="Next image">
+      <span aria-hidden="true">&rarr;</span>
+    </button>
+  </div>
+</section>
