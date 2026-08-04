@@ -1,11 +1,13 @@
-{{- $label := .Get "label" | default "Image carousel" -}}
 {{- $aspect := .Get "aspect" | default "4 / 3" -}}
 {{- .Page.Store.Set "hasCarousel" true -}}
+{{- .Page.Store.Set "renderingCarousel" true -}}
+{{- $slides := .Page.RenderString (dict "display" "block") .Inner -}}
+{{- .Page.Store.Delete "renderingCarousel" -}}
 
-<section class="image-carousel not-prose" data-carousel aria-label="{{ $label }}"
+<section class="image-carousel not-prose" data-carousel aria-label="Image carousel"
   aria-roledescription="carousel" style="{{ printf `--carousel-aspect: %s;` $aspect | safe.CSS }}">
   <div class="image-carousel__viewport" data-carousel-viewport tabindex="0">
-    {{- .Inner -}}
+    {{- $slides -}}
   </div>
   <div class="image-carousel__controls" data-carousel-controls hidden>
     <button class="image-carousel__button" data-carousel-previous type="button" aria-label="Previous image">

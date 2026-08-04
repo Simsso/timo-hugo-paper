@@ -1,0 +1,17 @@
+{{- $image := .image -}}
+{{- $alt := .alt -}}
+{{- $smallWidth := int (math.Min 768 $image.Width) -}}
+{{- $largeWidth := int (math.Min 1536 $image.Width) -}}
+{{- $small := $image.Resize (printf "%dx q82" $smallWidth) -}}
+{{- $large := $image.Resize (printf "%dx q82" $largeWidth) -}}
+{{- $smallAVIF := $image.Resize (printf "%dx avif q60" $smallWidth) -}}
+{{- $largeAVIF := $image.Resize (printf "%dx avif q60" $largeWidth) -}}
+<picture>
+  <source type="image/avif"
+    srcset="{{ $smallAVIF.RelPermalink }} {{ $smallAVIF.Width }}w, {{ $largeAVIF.RelPermalink }} {{ $largeAVIF.Width }}w"
+    sizes="(max-width: 768px) calc(100vw - 4rem), 704px">
+  <img src="{{ $small.RelPermalink }}"
+    srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+    sizes="(max-width: 768px) calc(100vw - 4rem), 704px"
+    width="{{ $large.Width }}" height="{{ $large.Height }}" loading="lazy" decoding="async" alt="{{ $alt }}">
+</picture>

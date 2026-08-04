@@ -1,0 +1,34 @@
+{{- $caption := .PlainText -}}
+{{- $isCarousel := .Page.Store.Get "renderingCarousel" -}}
+{{- $showCaption := and .IsBlock (or $isCarousel (.Page.Param "markdown_image_captions")) -}}
+{{- $image := .Page.Resources.GetMatch .Destination -}}
+{{- $extension := path.Ext .Destination -}}
+{{- $darkDestination := printf "%s-dark%s" (strings.TrimSuffix $extension .Destination) $extension -}}
+{{- $darkImage := .Page.Resources.GetMatch $darkDestination -}}
+{{- $hasDarkImage := and $showCaption $darkImage (eq $darkImage.ResourceType "image") (ne $darkImage.MediaType.SubType "svg") -}}
+
+{{- if and $isCarousel (not $image) -}}
+  {{- errorf "carousel image %q was not found in the page bundle: %s" .Destination .Position -}}
+{{- end -}}
+
+{{- if and $showCaption $image (eq $image.ResourceType "image") (ne $image.MediaType.SubType "svg") -}}
+  <figure{{ if $isCarousel }} class="image-carousel__slide" data-carousel-slide{{ end }}>
+    <a{{ if $isCarousel }} class="image-carousel__media{{ if $hasDarkImage }} theme-image--light{{ end }}"{{ else if $hasDarkImage }} class="theme-image--light"{{ end }} href="{{ $image.RelPermalink }}">
+      {{- partial "responsive-picture.html" (dict "image" $image "alt" $caption) -}}
+    </a>
+    {{- if $hasDarkImage }}
+    <a class="{{ if $isCarousel }}image-carousel__media {{ end }}theme-image--dark" href="{{ $darkImage.RelPermalink }}">
+      {{- partial "responsive-picture.html" (dict "image" $darkImage "alt" $caption) -}}
+    </a>
+    {{- end }}
+    {{- with $caption }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  {{- $src := .Destination -}}
+  {{- with $image }}{{ $src = .RelPermalink }}{{ end -}}
+  {{- if and .IsBlock (not $showCaption) }}<p>{{ end -}}
+  {{- if $showCaption }}<figure>{{ end -}}
+  <img src="{{ $src | safeURL }}"{{ with $caption }} alt="{{ . }}"{{ end }}{{ with .Title }} title="{{ . }}"{{ end }}>
+  {{- if $showCaption }}{{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}</figure>{{ end -}}
+  {{- if and .IsBlock (not $showCaption) }}</p>{{ end -}}
+{{- end -}}
