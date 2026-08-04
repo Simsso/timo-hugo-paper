@@ -3,7 +3,7 @@
 {{- .Page.Store.Set "hasCarousel" true -}}
 
 <section class="image-carousel not-prose" data-carousel aria-label="{{ $label }}"
-  aria-roledescription="carousel" style="--carousel-aspect: {{ $aspect }};">
+  aria-roledescription="carousel" style="{{ printf `--carousel-aspect: %s;` $aspect | safe.CSS }}">
   <div class="image-carousel__viewport" data-carousel-viewport tabindex="0">
     {{- .Inner -}}
   </div>

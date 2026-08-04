@@ -78,6 +78,11 @@ main img {
     scroll-snap-stop: always;
 }
 
+.image-carousel--enhanced .image-carousel__slide[aria-hidden="true"] {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 .image-carousel__media {
     align-items: center;
     aspect-ratio: var(--carousel-aspect, 4 / 3);
@@ -104,13 +109,31 @@ main img {
 
 .image-carousel__slide figcaption {
     color: rgb(0 0 0 / 60%);
-    font-size: 0.875rem;
+    font-size: inherit;
     line-height: 1.4;
     margin-top: 0.625rem;
     text-align: center;
 }
 
 .dark .image-carousel__slide figcaption {
+    color: rgb(255 255 255 / 60%);
+}
+
+.prose :where(figure figcaption):not(:where([class~="not-prose"] *)) {
+    color: rgb(0 0 0 / 60%);
+    font-size: inherit;
+    line-height: 1.4;
+    margin-top: 0.625rem;
+    text-align: center;
+    -webkit-user-select: all;
+    user-select: all;
+}
+
+.prose :where(figure figcaption p):not(:where([class~="not-prose"] *)) {
+    margin: 0;
+}
+
+.dark .prose :where(figure figcaption):not(:where([class~="not-prose"] *)) {
     color: rgb(255 255 255 / 60%);
 }
 

@@ -35,6 +35,11 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
     previous.disabled = activeIndex === 0;
     next.disabled = activeIndex === slides.length - 1;
     counter.textContent = `${activeIndex + 1} / ${slides.length}`;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === activeIndex;
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      slide.toggleAttribute('inert', !isActive);
+    });
     dotButtons.forEach((dot, dotIndex) => {
       if (dotIndex === activeIndex) dot.setAttribute('aria-current', 'true');
       else dot.removeAttribute('aria-current');
@@ -42,10 +47,12 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   }
 
   function goTo(index) {
-    slides[Math.max(0, Math.min(index, slides.length - 1))].scrollIntoView({
+    const target = slides[Math.max(0, Math.min(index, slides.length - 1))];
+    const viewportLeft = viewport.getBoundingClientRect().left;
+    const targetLeft = viewport.scrollLeft + target.getBoundingClientRect().left - viewportLeft;
+    viewport.scrollTo({
+      left: targetLeft,
       behavior: prefersReducedMotion.matches ? 'auto' : 'smooth',
-      block: 'nearest',
-      inline: 'start',
     });
   }
 
